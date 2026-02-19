@@ -6,7 +6,7 @@ public class GoPlaces : MonoBehaviour
 {
     private int NumberOfPlaceInArrayPlaces;
     private Transform[] arrayPlaces;
-    
+
     public float _float;
     public Transform AllPlacespoint;
 
@@ -14,8 +14,8 @@ public class GoPlaces : MonoBehaviour
     {
         arrayPlaces = new Transform[AllPlacespoint.childCount];
 
-        for (int abcd = 0; abcd < AllPlacespoint.childCount; abcd++)
-            arrayPlaces[abcd] = AllPlacespoint.GetChild(abcd).GetComponent<Transform>();
+        for (int i = 0; i < AllPlacespoint.childCount; i++)
+            arrayPlaces[i] = AllPlacespoint.GetChild(i).GetComponent<Transform>();
     }
 
     private void Update()
@@ -25,7 +25,7 @@ public class GoPlaces : MonoBehaviour
 
         if (transform.position == _pointByNumberInArray.position) NextPlaceTakerLogic();
     }
-    
+
     public Vector3 NextPlaceTakerLogic()
     {
         NumberOfPlaceInArrayPlaces++;
@@ -35,9 +35,7 @@ public class GoPlaces : MonoBehaviour
 
         var thisPointVector = arrayPlaces[NumberOfPlaceInArrayPlaces].transform.position;
         transform.forward = thisPointVector - transform.position;
-        
+
         return thisPointVector;
     }
-
-
 }

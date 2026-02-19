@@ -35,10 +35,4 @@ public class InstantiateBulletsShooting : MonoBehaviour
             yield return new WaitForSeconds(_timeWaitShooting);
         }
     }
-
-
-
-
-
-
 }
