@@ -10,8 +10,6 @@ public class GoPlaces : MonoBehaviour
     public float _float;
     public Transform AllPlacespoint;
 
-
-
     private void Start()
     {
         arrayPlaces = new Transform[AllPlacespoint.childCount];
@@ -24,7 +22,6 @@ public class GoPlaces : MonoBehaviour
     {
         var _pointByNumberInArray = arrayPlaces[NumberOfPlaceInArrayPlaces];
         transform.position = Vector3.MoveTowards(transform.position, _pointByNumberInArray.position, _float * Time.deltaTime);
-
 
         if (transform.position == _pointByNumberInArray.position) NextPlaceTakerLogic();
     }

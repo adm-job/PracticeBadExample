@@ -12,12 +12,18 @@ public class InstantiateBulletsShooting : MonoBehaviour
 
     private void Start()
     {
-
         StartCoroutine(_shootingWorker());
     }
+    
+    public void Update()
+    {
+        // Update is called once per frame
+    }
+
     IEnumerator _shootingWorker()
     {
         bool isWork = enabled;
+
         while (isWork)
         {
             var _vector3direction = (ObjectToShoot.position - transform.position).normalized;
@@ -28,13 +34,8 @@ public class InstantiateBulletsShooting : MonoBehaviour
 
             yield return new WaitForSeconds(_timeWaitShooting);
         }
-
-
     }
-    public void Update()
-    {
-        // Update is called once per frame
-    }
+
 
 
 
