@@ -38,6 +38,7 @@ public class GoPlaces : MonoBehaviour
 
         var thisPointVector = arrayPlaces[NumberOfPlaceInArrayPlaces].transform.position;
         transform.forward = thisPointVector - transform.position;
+        
         return thisPointVector;
     }
 
