@@ -1,23 +1,17 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class InstantiateBulletsShooting : MonoBehaviour
 {
     [SerializeField] public float number;
-    [SerializeField] GameObject _prefab;
+    [SerializeField] Bullet _prefab;
     [SerializeField] public Transform ObjectToShoot;
     [SerializeField] float _timeWaitShooting;
 
     private void Start()
     {
         StartCoroutine(_shootingWorker());
-    }
-    
-    public void Update()
-    {
-        // Update is called once per frame
     }
 
     IEnumerator _shootingWorker()
