@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class GoPlaces : MonoBehaviour
 {
-    private int NumberPlacesArray;
-    private Transform[] arrayPlaces;
-    private float _speed;
-    private Transform AllPlacesPoint;
+    [SerializeField] private int _maxIndexArray;
+    [SerializeField] private Transform[] _arrayPlaces;
+    [SerializeField] private float _speed;
+    [SerializeField] private Transform _allPlacesPoint;
 
     private void Start()
     {
-        arrayPlaces = new Transform[AllPlacesPoint.childCount];
+        _arrayPlaces = new Transform[_allPlacesPoint.childCount];
 
-        for (int i = 0; i < AllPlacesPoint.childCount; i++)
-            arrayPlaces[i] = AllPlacesPoint.GetChild(i).GetComponent<Transform>();
+        for (int i = 0; i < _allPlacesPoint.childCount; i++)
+        {
+            _arrayPlaces[i] = _allPlacesPoint.GetChild(i).GetComponent<Transform>();
+        }
     }
 
     private void Update()
     {
-        var _pointByNumberInArray = arrayPlaces[NumberPlacesArray];
+        Transform _pointByNumberInArray = _arrayPlaces[_maxIndexArray - 1];
+        
         transform.position = Vector3.MoveTowards(transform.position, _pointByNumberInArray.position, _speed * Time.deltaTime);
 
         if (transform.position == _pointByNumberInArray.position) NextPlaceTakerLogic();
@@ -25,12 +28,15 @@ public class GoPlaces : MonoBehaviour
 
     public Vector3 NextPlaceTakerLogic()
     {
-        NumberPlacesArray++;
+        _maxIndexArray++;
 
-        if (NumberPlacesArray == arrayPlaces.Length)
-            NumberPlacesArray = 0;
+        if (_maxIndexArray == _arrayPlaces.Length)
+        {
+            _maxIndexArray = 0;
+        }
 
-        var thisPointVector = arrayPlaces[NumberPlacesArray].transform.position;
+        var thisPointVector = _arrayPlaces[_maxIndexArray].transform.position;
+        
         transform.forward = thisPointVector - transform.position;
 
         return thisPointVector;
