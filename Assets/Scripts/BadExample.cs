@@ -23,7 +23,10 @@ public class GoPlaces : MonoBehaviour
         
         transform.position = Vector3.MoveTowards(transform.position, _pointByNumberInArray.position, _speed * Time.deltaTime);
 
-        if (transform.position == _pointByNumberInArray.position) NextPlaceTakerLogic();
+        if (transform.position == _pointByNumberInArray.position)
+        {
+            NextPlaceTakerLogic();
+        }
     }
 
     public Vector3 NextPlaceTakerLogic()
