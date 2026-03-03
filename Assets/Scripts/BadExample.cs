@@ -1,47 +1,49 @@
 using UnityEngine;
 
-public class GoPlaces : MonoBehaviour
+public class Route : MonoBehaviour
 {
-    [SerializeField] private int _maxIndexArray;
-    [SerializeField] private Transform[] _arrayPlaces;
+    [SerializeField] private Transform[] _pointArray;
     [SerializeField] private float _speed;
-    [SerializeField] private Transform _allPlacesPoint;
+    [SerializeField] private Transform _pointParent;
 
+    private int _index = 0;
+    
     private void Start()
     {
-        _arrayPlaces = new Transform[_allPlacesPoint.childCount];
+        _pointArray = new Transform[_pointParent.childCount];
 
-        for (int i = 0; i < _allPlacesPoint.childCount; i++)
+        for (int i = 0; i < _pointParent.childCount; i++)
         {
-            _arrayPlaces[i] = _allPlacesPoint.GetChild(i).GetComponent<Transform>();
+            _pointArray[i] = _pointParent.GetChild(i).GetComponent<Transform>();
         }
     }
 
     private void Update()
     {
-        Transform _pointByNumberInArray = _arrayPlaces[_maxIndexArray - 1];
-        
-        transform.position = Vector3.MoveTowards(transform.position, _pointByNumberInArray.position, _speed * Time.deltaTime);
+        float distance = 0.1f;
+        Transform _pointRoute = _pointArray[_index];
 
-        if (transform.position == _pointByNumberInArray.position)
+        transform.position = Vector3.MoveTowards(transform.position, _pointRoute.position, _speed * Time.deltaTime);
+
+        if  ((_pointRoute.position - transform.position).sqrMagnitude < distance * distance)
         {
-            NextPlaceTakerLogic();
+            NextPoint();
         }
     }
 
-    public Vector3 NextPlaceTakerLogic()
+    private Vector3 NextPoint()
     {
-        _maxIndexArray++;
+        _index++;
 
-        if (_maxIndexArray == _arrayPlaces.Length)
+        if (_index == _pointArray.Length)
         {
-            _maxIndexArray = 0;
+            _index = 0;
         }
 
-        var thisPointVector = _arrayPlaces[_maxIndexArray].transform.position;
-        
-        transform.forward = thisPointVector - transform.position;
+        Vector3 currentVector = _pointArray[_index].transform.position;
 
-        return thisPointVector;
+        transform.forward = currentVector - transform.position;
+
+        return currentVector;
     }
 }
