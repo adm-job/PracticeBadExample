@@ -24,7 +24,11 @@ public class BulletShooting : MonoBehaviour
             Bullet bullet = Instantiate(_bullet, transform.position + direction, Quaternion.identity);
 
             bullet.transform.rotation = Quaternion.LookRotation(direction);
-            bullet.GetComponent<Rigidbody>().velocity = direction * _speed;
+            
+            if (bullet.TryGetComponent(out Rigidbody rb))
+            {
+                rb.velocity = direction * _speed;
+            }
 
             yield return _delay;
         }
