@@ -20,8 +20,6 @@ public class BulletShooting : MonoBehaviour
 
         while (enabled)
         {
-            if(_objectTarget == null) yield break;
-
             Vector3 direction = (_objectTarget.position - transform.position).normalized;
             Bullet bullet = Instantiate(_bullet, transform.position + direction, Quaternion.identity);
 
