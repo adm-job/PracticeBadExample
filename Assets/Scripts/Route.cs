@@ -31,19 +31,12 @@ public class Route : MonoBehaviour
         }
     }
 
-    private Vector3 NextPoint()
+    private void NextPoint()
     {
-        _index++;
-
-        if (_index == _pointArray.Length)
-        {
-            _index = 0;
-        }
+        _index = ++_index % _pointArray.Length;
 
         Vector3 currentVector = _pointArray[_index].transform.position;
 
         transform.forward = currentVector - transform.position;
-
-        return currentVector;
     }
 }
